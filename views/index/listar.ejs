@@ -1,0 +1,29 @@
+<div class="container-fluid card-livro-padding">
+    <div class="row justify-content-center">
+        <% for (let contador = 0; contador < produtoData.length; contador++) { %>
+            <div class="col-md-4 custom-card-spacing" id="produtoCard<%= produtoData[contador].id %>">
+                <div class="card-livro">
+                    <h4><%= produtoData[contador].categoria %></h4>
+                    <h4><%= produtoData[contador].subcategoria %></h4>
+                    <h4><%= produtoData[contador].titulo %></h4>
+                    <h4><%= produtoData[contador].data %></h4>
+                    <h4><%= produtoData[contador].hora %></h4>
+                    <h4><%= produtoData[contador].preco %></h4>
+                    <a class="btn-editar" href="/produto/editarProduto?id=<%= produtoData[contador].id %>">Editar</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    async function editarProduto(id) {
+        try {
+            window.location.href = `/editarProduto?id=${id}`;
+        } catch (error) {
+            console.error('Erro ao editar produto:', error);
+        }
+    }
+
+
+</script>

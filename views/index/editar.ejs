@@ -1,0 +1,66 @@
+<!-- views/index/editar.ejs -->
+
+<div class="cadastro-container container-fluid my-5">
+    <div class="container">
+        <form id="formEdicao" class="row" action="/produto/editarProduto?id=<%= id %>" method="POST">
+            <!-- Coluna dos inputs de texto -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="categoria" class="cadastro-title">Categoria</label>
+                    <input type="text" class="form-control campo-obrigatorio-vazio" id="categoria" name="categoria" value="<%= valoresLivro.categoria %>" placeholder="Digite a categoria do produto..">
+                </div>
+
+                <div class="form-group">
+                    <label for="subcategoria" class="cadastro-title">Subcategoria</label>
+                    <input type="text" class="form-control campo-obrigatorio-vazio" id="subcategoria" name="subcategoria" value="<%= valoresLivro.subcategoria %>" placeholder="Digite a subcategoria do produto..">
+                </div>
+
+                <div class="form-group">
+                    <label for="titulo" class="cadastro-title">Titulo</label>
+                    <input type="text" class="form-control campo-obrigatorio-vazio" id="titulo" name="titulo" value="<%= valoresLivro.titulo %>" placeholder="Digite a titulo do produto..">
+                </div>
+
+                <div class="form-group">
+                    <label for="preco" class="cadastro-title">Preço</label>
+                    <input type="text" class="form-control campo-obrigatorio-vazio" id="preco" name="preco" value="<%= valoresLivro.preco %>" placeholder="Digite o preço do produto..">
+                </div>
+
+                <!-- Outros campos do formulário aqui -->
+
+                <button type="submit" class="btn btn-primary cor-botoes">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+        async function editarProduto(id) {
+        try {
+            const categoria = document.getElementById('categoria').value;
+            const subcategoria = document.getElementById('subcategoria').value;
+            const titulo = document.getElementById('titulo').value;
+            const preco = document.getElementById('preco').value;
+
+            const response = await axios.put(`http://localhost:8080/produto/${id}`, {
+                categoria,
+                subcategoria,
+                titulo,
+                preco,
+            });
+
+            console.log(response.data); // Adicione este console.log para ver a resposta da API no terminal
+
+            // Redireciona ou executa alguma ação após o cadastro bem-sucedido
+        } catch (error) {
+            console.error('Erro ao editar produto:', error);
+            // Manipula o erro de alguma forma (ex: exibe uma mensagem de erro para o usuário)
+        }
+    }
+
+    document.getElementById('formEdicao').addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        editarProduto(id); // Chama a função para editar o produto com o ID especificado
+    });
+</script>
