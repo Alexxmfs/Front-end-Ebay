@@ -10,6 +10,7 @@
                     <h4><%= produtoData[contador].hora %></h4>
                     <h4><%= produtoData[contador].preco %></h4>
                     <a class="btn-editar" href="/produto/editarProduto?id=<%= produtoData[contador].id %>">Editar</a>
+                    <button onclick="deletarProduto('<%= produtoData[contador].id %>')" class="btn-deletar">Deletar</button>
                 </div>
             </div>
         <% } %>
@@ -25,5 +26,20 @@
         }
     }
 
-
+    async function deletarProduto(id) {
+            if (confirm('Tem certeza que deseja deletar este produto?')) {
+                try {
+                    const response = await axios.delete(`http://localhost:8080/produto/${id}`);
+                    if (response.status === 204 || response.status === 200) {
+                        alert('Produto deletado com sucesso!');
+                        document.getElementById(`produtoCard${id}`).style.display = 'none';
+                    } else {
+                        alert('Erro ao deletar o produto.');
+                    }
+                } catch (error) {
+                    console.error('Erro ao deletar produto:', error);
+                    alert('Erro ao deletar o produto.');
+                }
+            }
+        }
 </script>
