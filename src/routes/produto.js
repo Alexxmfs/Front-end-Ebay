@@ -19,6 +19,12 @@ class LivroRoute {
     async criarProduto(req, res) {
         res.render("index/criar");
     }
+    async signUp(req, res) {
+        res.render("index/signUp");
+    }
+    async signIn(req, res) {
+        res.render("index/signIn");
+    }
     async editarProduto(req, res) {
         try {
             const id = parseInt(req.query.id);

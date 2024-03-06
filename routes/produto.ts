@@ -1,7 +1,6 @@
 import app = require("teem");
 import axios from 'axios';
-import { Pool } from 'pg';
-import { Request, Response } from 'express';
+    import { Request, Response } from 'express';
 
 class LivroRoute {
 
@@ -24,6 +23,14 @@ class LivroRoute {
     
     public async criarProduto(req: app.Request, res: app.Response) {
 		res.render("index/criar");
+	}
+
+    public async signUp(req: app.Request, res: app.Response) {
+		res.render("index/signUp");
+	}
+
+    public async signIn(req: app.Request, res: app.Response) {
+		res.render("index/signIn");
 	}
 
     public async editarProduto(req: Request, res: Response): Promise<void> {

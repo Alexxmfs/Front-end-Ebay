@@ -1,0 +1,51 @@
+<div class="cadastro-container container-fluid my-5">
+    <div class="container">
+        <form id="formCadastro" class="row">
+            <!-- Coluna dos inputs de texto -->
+            <div class="col-md-6">
+                <div class="form-group" method="POST">
+                    <label for="login" class="cadastro-title">Login</label>
+                    <input type="text" class="form-control campo-obrigatorio-vazio" id="login" name="login" placeholder="Digite a login do produto..">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cadastro-title">Password</label>
+                    <input type="text" class="form-control campo-obrigatorio-vazio" id="password" name="password" placeholder="Digite a password do produto..">
+                </div>
+
+                <div class="form-group">
+                    <label for="role" class="cadastro-title">Role</label>
+                    <input type="text" class="form-control campo-obrigatorio-vazio" id="role" name="role" placeholder="Digite a role do produto..">
+                </div>
+
+                <button type="submit" class="btn btn-primary cor-botoes">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    async function cadastrarProduto() {
+        try {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            const response = await axios.post('http://localhost:8080/auth/register', {
+                login,
+                password,
+                role,
+            });
+
+            console.log(response.data); 
+
+        } catch (error) {
+            console.error('Erro ao cadastrar produto:', error);
+        }
+    }
+
+    document.getElementById('formCadastro').addEventListener('submit', function (event) {
+        event.preventDefault(); 
+        cadastrarProduto(); 
+    });
+</script>
